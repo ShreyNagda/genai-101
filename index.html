@@ -1,15 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Fun Facts Generator</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Fun Facts About Me!</h1>
-    <div id="fact-display">Click the button to see a fun fact!</div>
-    <button onclick="generateFact()">Generate Another Fun Fact</button>
-    <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cricket Facts Generator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: white;
+        color: black;
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      h1 {
+        color: red;
+        animation: fadeIn 1s ease-in;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: red;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      button:hover {
+        background-color: darkred;
+        transform: scale(1.05);
+      }
+
+      #fact-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #fact-display {
+        margin: 20px;
+        font-size: 18px;
+        color: black;
+        border: 1px solid red;
+        padding: 10px;
+        border-radius: 5px;
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Cricket Facts Generator</h1>
+    <div id="fact-wrapper">
+      <div id="fact-display">Click the button to see a cricket fact!</div>
+      <button id="generate-button">Generate Another Fact</button>
+    </div>
+
+    <script>
+      let facts = [
+        "The first-ever Test match was played between Australia and England in 1877.",
+        "Sachin Tendulkar holds the record for the most runs in international cricket.",
+        "The longest ODI match lasted 50 overs and was played between South Africa and England in 1992.",
+        "Cricket was first played in England in the 16th century.",
+        "The ICC Cricket World Cup is held every four years.",
+      ];
+
+      document
+        .getElementById("generate-button")
+        .addEventListener("click", generateFact);
+
+      function generateFact() {
+        if (facts.length > 0) {
+          const factDisplay = document.getElementById("fact-display");
+          const randomIndex = Math.floor(Math.random() * facts.length);
+          factDisplay.textContent = facts[randomIndex];
+
+          // Reset animation
+          factDisplay.style.animation = "none"; // Remove the animation
+          factDisplay.offsetHeight; // Trigger reflow
+          factDisplay.style.animation = ""; // Reapply the animation
+        } else {
+          console.log("No facts available.");
+        }
+      }
+    </script>
+  </body>
 </html>
